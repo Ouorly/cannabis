@@ -3,7 +3,6 @@
 *~
 __pycache__
 myvenv
-
 db.mydb2
 /static
 .DS_Store
