@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="heading-v1">
+
+        <title>Cannabinoid medical database</title>
+        <div>
+            <h1 style="color:#191970">Cannabinoid medical database</h1>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="outline">
+
+            </div>
+            <h3 style="color:#191970">This database is designed for researchers working in a field of medical cannabis.
+                Cannabinoid medical database aggregates information from Pubmed articles and Clinical trials and makes
+                it possible to analyze data about cannabinoid efficacy for various diseases.</h3>
+
+            <form action="" method="post">
+                {%csrf_token%}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-success" value="Search">
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <html>
+        <head>
+         <meta charset="utf-8">
+          <title>Цвет горизонтальной линии</title>
+        <style>
+            hr {
+            border: none; /* Убираем границу */
+            background-color: red; /* Цвет линии */
+            color: red; /* Цвет линии для IE6-7 */
+            height: 2px; /* Толщина линии */
+            }
+        </style>
+        </head>
+         <body>
+         </body>
+        </html>
+
+    </div>
+</div>
+<div class="row">
+    <table class="table">
+        {% for post in posts%}
+        <tr>
+            {% for art in post.fk_article_research.all%}
+            <td>{{art.fk_drug}}</td>
+            <td>{{art.dosage}}</td>
+            <td>{{art.fk_side_effect.name}}</td>
+
+            <td>{% for author in post.fk_author.all %}{{author.name}}{%endfor%}</td>
+
+            <td><a href="{% url 'post_single' pk=post.id %}">{{post.name}}</a> </td>
+            {%endfor%}
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    {#<a href="{% url 'post_single' pk=post.fk_article %}">{{post.fk_article}}</a>#}
+
+</div>
+{% endblock content %}
