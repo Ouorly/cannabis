@@ -74,20 +74,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb2',
-        'USER': 'postgres',
-        'PASSWORD': 'evyfz553157',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-       # 'OPTIONS': {
-        #            'options': '-c search_path=dictionaries,clinical_trial,disease,drug,patient_group,article_research,article,clinical_trial'
-        #        }
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -122,8 +108,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
+try: 
+    from .local_settings import * 
+except ImportError: 
+    from .prod_settings import *
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
