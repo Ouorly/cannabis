@@ -4,13 +4,14 @@ from .models import TypeOfResearch, ArticleResearch
 class SearchForm(forms.Form):
     """Форма поиска"""
     disease = forms.CharField()
+    number_of_pations = forms.IntegerField(required=False, error_messages={'required': ''})
     type_research = forms.ModelChoiceField(empty_label=None,
                                            required=False,
                                            error_messages={'required': ''},
                                            widget=forms.widgets.CheckboxSelectMultiple,
                                            queryset=TypeOfResearch.objects.all()
                                            )
-    number = forms.IntegerField(required=False, error_messages={'required': ''})
+
     # class Meta:
     #     model = ArticleResearch
     #     fields = ("fk_disease", "fk_type_of_research", "number_of_pations")

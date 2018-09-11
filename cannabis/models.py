@@ -96,12 +96,12 @@ class Journal(models.Model):
 
 
 class PatientGroup(models.Model):
-    fk_gender_id = models.ForeignKey(Gender, on_delete=models.CASCADE)
-    number_of_patient = models.IntegerField(default=0)
-    combination = models.TextField()
-    second_condition = models.ForeignKey(Disease, on_delete=models.CASCADE)
-    years_min = models.CharField(max_length=150)
-    years_max = models.CharField(max_length=150)
+    fk_gender_id = models.ForeignKey(Gender, blank=True, null=True, on_delete=models.CASCADE)
+    number_of_patient = models.IntegerField(default=0, blank=True, null=True)
+    combination = models.TextField(blank=True, null=True)
+    second_condition = models.ForeignKey(Disease,blank=True, null=True, on_delete=models.CASCADE)
+    years_min = models.CharField(blank=True, null=True, max_length=150)
+    years_max = models.CharField(blank=True, null=True, max_length=150)
 
     # class Meta:
     #     managed = False
@@ -168,25 +168,25 @@ class AnimalTypePatient(models.Model):
 
 
 class ArticleResearch(models.Model):
-    fk_effect = models.ForeignKey(Effect, on_delete=models.CASCADE)
-    fk_drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
-    fk_disease = models.ForeignKey(Disease, on_delete=models.CASCADE) # Болезнь
-    dosage = models.TextField() #режим (2столбец)
-    fk_formation = models.ForeignKey(Formation, on_delete=models.CASCADE)
-    fk_type_of_research = models.ForeignKey(TypeOfResearch, on_delete=models.CASCADE) # Фильтр тип иследуемого
-    regimen = models.TextField()
-    cell_type = models.TextField()
-    fk_animal_type = models.ForeignKey(AnimalType, on_delete=models.CASCADE)
-    fk_patient_group = models.ForeignKey(PatientGroup, on_delete=models.CASCADE) #пациенты
-    fk_side_effect = models.ForeignKey(SideEffect, on_delete=models.CASCADE)#побочки (3 столбец)
-    side_effect = models.TextField()
-    fk_gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
-    combination = models.TextField()
-    fk_second_condition = models.ForeignKey(Disease, on_delete=models.CASCADE, related_name='second_condition')
-    human_study_parameters = models.TextField()
-    years_min = models.TextField()
-    years_max = models.TextField()
-    number_of_pations = models.IntegerField() # Число иследуемых
+    fk_effect = models.ForeignKey(Effect, blank=True, null=True, on_delete=models.CASCADE)
+    fk_drug = models.ForeignKey(Drug, blank=True, null=True, on_delete=models.CASCADE)
+    fk_disease = models.ForeignKey(Disease, blank=True, null=True, on_delete=models.CASCADE) # Болезнь
+    dosage = models.TextField( blank=True, null=True) #режим (2столбец)
+    fk_formation = models.ForeignKey(Formation, blank=True, null=True, on_delete=models.CASCADE)
+    fk_type_of_research = models.ForeignKey(TypeOfResearch, blank=True, null=True, on_delete=models.CASCADE) # Фильтр тип иследуемого
+    regimen = models.TextField( blank=True, null=True)
+    cell_type = models.TextField( blank=True, null=True)
+    fk_animal_type = models.ForeignKey(AnimalType, blank=True, null=True, on_delete=models.CASCADE)
+    fk_patient_group = models.ForeignKey(PatientGroup, blank=True, null=True, on_delete=models.CASCADE) #пациенты
+    fk_side_effect = models.ForeignKey(SideEffect, blank=True, null=True, on_delete=models.CASCADE)#побочки (3 столбец)
+    side_effect = models.TextField(blank=True, null=True)
+    fk_gender = models.ForeignKey(Gender, blank=True, null=True, on_delete=models.CASCADE)
+    combination = models.TextField(blank=True, null=True)
+    fk_second_condition = models.ForeignKey(Disease, blank=True, null=True, on_delete=models.CASCADE, related_name='second_condition')
+    human_study_parameters = models.TextField(blank=True, null=True)
+    years_min = models.TextField(blank=True, null=True)
+    years_max = models.TextField(blank=True, null=True)
+    number_of_pations = models.IntegerField(blank=True, null=True) # Число иследуемых
 
     # class Meta:
     #     managed = False
@@ -195,10 +195,10 @@ class ArticleResearch(models.Model):
 
 
 class Article(models.Model):
-    name = models.CharField(max_length=150)
+    name = models.CharField(max_length=200)
     pubmed = models.IntegerField(default=0, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    abstract = models.TextField()
+    abstract = models.TextField(blank=True, null=True)
     fk_journal = models.ForeignKey(Journal, on_delete=models.CASCADE)
     keywords = models.TextField(blank=True, null=True)
     fk_article_research = models.ManyToManyField(ArticleResearch)
