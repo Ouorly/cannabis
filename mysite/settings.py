@@ -108,8 +108,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-try: 
-    from .local_settings import * 
-except ImportError: 
+try:
+    from .local_settings import *
+except ImportError:
     from .prod_settings import *
 
