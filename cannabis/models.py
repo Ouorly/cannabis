@@ -200,7 +200,7 @@ class ArticleResearch(models.Model):
     human_study_parameters = models.TextField(blank=True, null=True)
     years_min = models.TextField(blank=True, null=True)
     years_max = models.TextField(blank=True, null=True)
-    number_of_pations = models.BigIntegerField(blank=True, null=True) # Число иследуемых
+    number_of_pations = models.IntegerField(blank=True, null=True) # Число иследуемых
 
     # class Meta:
     #     managed = False
