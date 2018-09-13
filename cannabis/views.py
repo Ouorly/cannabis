@@ -20,15 +20,15 @@ class CannabisView(View):
         #if forms_type.is_valid():
 
         #if form.is_valid():
-        number = request.POST.get("number") #form.cleaned_data["number"]
+        number_of_patients = request.POST.get("number_of_patients") #form.cleaned_data["number"]
         type_research = request.POST.getlist("type_research", None) #form.cleaned_data["type_research"]
         disease = request.POST.get("disease") #form.cleaned_data["disease"]
         #print(type_research)
         filt = []
 
-        if number:
+        if number_of_patients:
             num = Q()
-            num &= Q(fk_article_research__number_of_pations__gte=number)
+            num &= Q(fk_article_research__number_of_pations__gte=number_of_patients)
             filt.append(num)
         if type_research:
             type_r = Q()
