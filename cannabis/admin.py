@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import (ActiveSubstance, AnimalType, AnimalTypePatient, Article, ArticleResearch, ArticleArticleResearch,
+from .models import (ActiveSubstance, AnimalType, AnimalTypePatient, Article, ArticleResearch,
                      Author, ClinicalTrial, Disease, DiseaseSymptoms, DiseaseSynonyms, Drug, DrugActive, DrugFormation,
                      DrugSynonyms, Effect, Formation, Gender, Journal, PatientGroup, Race, SideEffect, Symptom, TestType,
                      TypeArticle, TypeOfResearch)
@@ -12,7 +12,7 @@ admin.site.register(AnimalType)
 admin.site.register(AnimalTypePatient)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(ArticleResearch)
-admin.site.register(ArticleArticleResearch)
+# admin.site.register(ArticleArticleResearch)
 admin.site.register(Author)
 admin.site.register(ClinicalTrial)
 admin.site.register(Disease)

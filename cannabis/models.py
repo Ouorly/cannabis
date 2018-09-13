@@ -5,14 +5,16 @@ class ActiveSubstance(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class AnimalType(models.Model):
     name = models.CharField(max_length=150)
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class Author(models.Model):
     name = models.CharField(max_length=150)
@@ -38,7 +40,8 @@ class DiseaseSynonyms(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class Drug(models.Model):
     name = models.TextField()
@@ -64,7 +67,8 @@ class DrugSynonyms(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name_synonyms
 
 class Effect(models.Model):
     name = models.TextField()
@@ -79,21 +83,24 @@ class Formation(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class Gender(models.Model):
     name = models.TextField()
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class Journal(models.Model):
     name = models.TextField()
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class PatientGroup(models.Model):
     fk_gender_id = models.ForeignKey(Gender, blank=True, null=True, on_delete=models.CASCADE)
@@ -112,21 +119,24 @@ class Race(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class SideEffect(models.Model):
     name = models.TextField()
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class Symptom(models.Model):
     name = models.TextField()
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class DiseaseSymptoms(models.Model):
     fk_disease = models.ForeignKey(Disease, on_delete=models.CASCADE)
@@ -134,21 +144,24 @@ class DiseaseSymptoms(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.fk_disease
 
 class TestType(models.Model):
     name = models.TextField()
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class TypeArticle(models.Model):
     name = models.TextField()
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.name
 
 class TypeOfResearch(models.Model):
     name = models.TextField()
@@ -165,7 +178,8 @@ class AnimalTypePatient(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return  self.fk_animal_type
 
 class ArticleResearch(models.Model):
     fk_effect = models.ForeignKey(Effect, blank=True, null=True, on_delete=models.CASCADE)
@@ -186,23 +200,23 @@ class ArticleResearch(models.Model):
     human_study_parameters = models.TextField(blank=True, null=True)
     years_min = models.TextField(blank=True, null=True)
     years_max = models.TextField(blank=True, null=True)
-    number_of_pations = models.IntegerField(blank=True, null=True) # Число иследуемых
+    number_of_pations = models.BigIntegerField(blank=True, null=True) # Число иследуемых
 
     # class Meta:
     #     managed = False
     def __str__(self):
-        return "{}".format(self.fk_effect)
+        return "{}".format(self.fk_disease)
 
 
 class Article(models.Model):
-    name = models.CharField(max_length=200)
-    pubmed = models.IntegerField(default=0, blank=True, null=True)
+    name = models.CharField(max_length=300)
+    pubmed = models.BigIntegerField(default=0, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
     abstract = models.TextField(blank=True, null=True)
-    fk_journal = models.ForeignKey(Journal, on_delete=models.CASCADE)
+    fk_journal = models.ForeignKey(Journal, blank=True, null=True, on_delete=models.CASCADE)
     keywords = models.TextField(blank=True, null=True)
-    fk_article_research = models.ManyToManyField(ArticleResearch)
-    fk_author = models.ManyToManyField(Author)
+    fk_article_research = models.ManyToManyField(ArticleResearch,blank=True, null=True)
+    fk_author = models.ManyToManyField(Author,blank=True, null=True)
 
     # class Meta:
     #     managed = False
@@ -210,14 +224,15 @@ class Article(models.Model):
         return "{}".format(self.name)
 
 
-class ArticleArticleResearch(models.Model):
-    fk_article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    fk_article_research = models.ForeignKey(ArticleResearch, on_delete=models.CASCADE)
-
-    #class Meta:
-        #db_table = 'article_article_research'
-
-
+# class ArticleArticleResearch(models.Model):
+#     fk_article = models.ForeignKey(Article, on_delete=models.CASCADE)
+#     fk_article_research = models.ForeignKey(ArticleResearch, on_delete=models.CASCADE)
+#
+#     #class Meta:
+#         #db_table = 'article_article_research'
+#
+#     def __str__(self):
+#         return self.fk_article
 
 class ClinicalTrial(models.Model):
     dosage = models.TextField()
@@ -231,7 +246,8 @@ class ClinicalTrial(models.Model):
 
     # class Meta:
     #     managed = False
-
+    def __str__(self):
+        return self.fk_disease_id
 
 class DrugFormation(models.Model):
     fk_drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
@@ -239,3 +255,5 @@ class DrugFormation(models.Model):
 
     # class Meta:
     #     managed = False
+    def __str__(self):
+        return self.fk_drug

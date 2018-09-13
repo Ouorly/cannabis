@@ -23,7 +23,7 @@ class CannabisView(View):
         number = request.POST.get("number") #form.cleaned_data["number"]
         type_research = request.POST.getlist("type_research", None) #form.cleaned_data["type_research"]
         disease = request.POST.get("disease") #form.cleaned_data["disease"]
-        print(type_research)
+        #print(type_research)
         filt = []
 
         if number:
@@ -34,7 +34,7 @@ class CannabisView(View):
             type_r = Q()
             type_r &= Q(fk_article_research__fk_type_of_research__id__in=type_research)
             filt.append(type_r)
-        posts = Article.objects.filter(Q(fk_article_research__fk_disease__name=disease)).filter(*filt)
+        posts = Article.objects.filter(Q(fk_article_research__fk_disease__name__istartswith=disease)).filter(*filt)
         print(posts)
         return render(request, 'cannabis/cannabis.html', {"form": form, "posts": posts})
         #else:
