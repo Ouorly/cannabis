@@ -12,10 +12,8 @@
         <body>
         <hr align="center" width="400" color=#191970 />
         </body>
-
         <div class="col-lg-12 col-md-12 col-sm-2 col-xs-12">
             <div class="outline">
-
             </div>
             <blockquote class="blockquote text-center">
             <h5 style="color:#191970;">This database is designed for researchers working in a field of medical cannabis.
@@ -23,17 +21,14 @@
                 it possible to analyze data about cannabinoid efficacy for various diseases.</h5>
             </blockquote>
 
-        <body>
-        <hr align="center" width="1100" color=#191970 />
-        </body>
-
+            <body>
+            <hr align="center" width="1100" color=#191970 />
+            </body>
             <form action="" method="post">
-
-               {%csrf_token%}
+                {%csrf_token%}
                 {{form.as_p}}
                 <input type="submit"class="btn btn-light btn-lg btn-block" value="Search">
             </form>
-
         </div>
     </div>
 </div>
@@ -49,26 +44,37 @@
     </div>
 </div>
         <div class="col-lg-12 col-md-12 col-sm-2 col-xs-12">
-<div class="row">
-    <table class="table">
+            <div class="row">
+<div class="table-responsive">
+    <table class="table table-hover">
+
+        <thead>
+            <tr>
+                <th>Type of research</th>
+                <th>Drug</th>
+                <th>Dosage</th>
+                <th>Journal</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for post in posts%}
-        <tr>
-            {% for art in post.fk_article_research.all%}
-            <td>{{art.fk_drug}}</td>
-            <td>{{art.dosage}}</td>
-            <td>{{art.fk_side_effect.name}}</td>
-
-            <td>{% for author in post.fk_author.all %}{{author.name}}{%endfor%}</td>
-
-            <td><a href="{% url 'post_single' pk=post.id %}">{{post.name}}</a> </td>
-            {%endfor%}
-        </tr>
+            <tr>
+                {% for art in post.fk_article_research.all%}
+                <td>{{art.fk_type_of_research}}</td>
+                <td>{{art.fk_drug}}</td>
+                <td>{{art.dosage}}</td>
+                <td>{{art.fk_journal}}</td>
+                <td>{% for author in post.fk_author.all %}{{author.name}}{%endfor%}</td>
+                <td><a href="{% url 'post_single' pk=post.id %}">{{post.name}}</a> </td>
+                {%endfor%}
+            </tr>
+        </tbody>
         {% endfor %}
     </table>
-
 
     {#<a href="{% url 'post_single' pk=post.fk_article %}">{{post.fk_article}}</a>#}
 
 </div>
 </div>
+            </div>
 {% endblock content %}

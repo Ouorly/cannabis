@@ -31,6 +31,7 @@ class Disease(models.Model):
 
     # class Meta:
     #     managed = False
+
     def __str__(self):
         return self.name
 
@@ -204,6 +205,7 @@ class ArticleResearch(models.Model):
 
     # class Meta:
     #     managed = False
+
     def __str__(self):
         return "{}".format(self.fk_disease)
 
@@ -222,7 +224,6 @@ class Article(models.Model):
     #     managed = False
     def __str__(self):
         return "{}".format(self.name)
-
 
 # class ArticleArticleResearch(models.Model):
 #     fk_article = models.ForeignKey(Article, on_delete=models.CASCADE)

@@ -4,8 +4,8 @@
 <h1>{{post.name}} </h1>
 <p>{{post.abstract}}</p>
 <p>{% for author in post.fk_author.all %}{{author.name}}{%endfor%}</p>
-<p>{{post.keywords}}</p>
 <p>{{post.date}}</p>
+<p><a href="https://www.ncbi.nlm.nih.gov/pubmed/?term={{post.pubmed}}">www.ncbi.nlm.nih.gov/pubmed/?term={{post.pubmed}}</a></p>
 <p>{{post.fk_second_condition}}</p>
 <p>{{regimen}}</p>
 {% endblock content %}
